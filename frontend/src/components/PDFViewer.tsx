@@ -1,14 +1,45 @@
 "use client";
 
-import { X } from "lucide-react";
+import { useState } from "react";
+import { Document, Page, pdfjs } from "react-pdf";
+import { X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useChatStore } from "@/store/chatStore";
+import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+import "react-pdf/dist/esm/Page/TextLayer.css";
+
+// PDF.js worker 설정
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 export function PDFViewer() {
   const { selectedBook, setSelectedBook } = useChatStore();
+  const [numPages, setNumPages] = useState<number | null>(null);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [scale, setScale] = useState(1.0);
+
+  function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
+    setNumPages(numPages);
+    setPageNumber(1);
+  }
 
   function handleClose() {
     setSelectedBook(null);
+  }
+
+  function goToPrevPage() {
+    setPageNumber((prev) => Math.max(prev - 1, 1));
+  }
+
+  function goToNextPage() {
+    setPageNumber((prev) => Math.min(prev + 1, numPages || 1));
+  }
+
+  function zoomIn() {
+    setScale((prev) => Math.min(prev + 0.2, 3.0));
+  }
+
+  function zoomOut() {
+    setScale((prev) => Math.max(prev - 0.2, 0.5));
   }
 
   if (!selectedBook) {
@@ -35,13 +66,70 @@ export function PDFViewer() {
         </Button>
       </div>
 
-      {/* PDF Content - 브라우저 기본 뷰어 사용 */}
-      <div className="flex-1 w-full">
-        <iframe
-          src="/testpdf.pdf"
-          className="w-full h-full border-0"
-          title={selectedBook.title}
-        />
+      {/* Controls */}
+      <div className="flex items-center justify-between p-2 border-b bg-background gap-2">
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={goToPrevPage}
+            disabled={pageNumber <= 1}
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </Button>
+          <span className="text-sm whitespace-nowrap">
+            Page {pageNumber} of {numPages || "..."}
+          </span>
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={goToNextPage}
+            disabled={pageNumber >= (numPages || 1)}
+          >
+            <ChevronRight className="h-4 w-4" />
+          </Button>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="icon" onClick={zoomOut}>
+            <ZoomOut className="h-4 w-4" />
+          </Button>
+          <span className="text-sm whitespace-nowrap">
+            {Math.round(scale * 100)}%
+          </span>
+          <Button variant="outline" size="icon" onClick={zoomIn}>
+            <ZoomIn className="h-4 w-4" />
+          </Button>
+        </div>
+      </div>
+
+      {/* PDF Content */}
+      <div className="flex-1 overflow-auto bg-gray-100 flex items-start justify-center p-4">
+        <Document
+          file="/testpdf.pdf"
+          onLoadSuccess={onDocumentLoadSuccess}
+          loading={
+            <div className="flex items-center justify-center p-8">
+              <p className="text-muted-foreground">Loading PDF...</p>
+            </div>
+          }
+          error={
+            <div className="flex items-center justify-center p-8">
+              <p className="text-destructive">Failed to load PDF file.</p>
+            </div>
+          }
+        >
+          <Page
+            pageNumber={pageNumber}
+            scale={scale}
+            loading={
+              <div className="flex items-center justify-center p-8">
+                <p className="text-muted-foreground">Loading page...</p>
+              </div>
+            }
+            className="shadow-lg"
+          />
+        </Document>
       </div>
     </div>
   );
