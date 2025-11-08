@@ -3,7 +3,7 @@ from typing import List, Optional
 from langchain_core.documents import Document
 from langchain_openai import OpenAIEmbeddings
 
-from langchain_ollama import OllamaEmbeddings
+# from langchain_ollama import OllamaEmbeddings  # 사용하지 않으므로 주석 처리
 from langchain_postgres import PGVector
 from sqlalchemy import create_engine
 from config import Config

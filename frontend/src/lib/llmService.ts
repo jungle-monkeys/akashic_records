@@ -1,15 +1,58 @@
 import { AnalysisResult } from "@/types/Textbook";
-import { searchTextbooks } from "./mockData";
 
-// Simulated LLM service
-// In production, this would call an actual LLM API (OpenAI, Claude, etc.)
+// Backend API URL
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+
+/**
+ * Real LLM service - Backend API 연동
+ */
 export async function analyzeLearningQuery(
   query: string
 ): Promise<AnalysisResult> {
+  try {
+    const response = await fetch(`${API_URL}/api/analyze`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query,
+        k: 5, // 검색할 문서 개수
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`API 오류: ${response.status} ${response.statusText}`);
+    }
+
+    const data = await response.json();
+
+    // Backend 응답을 Frontend 형식으로 변환
+    return {
+      query: data.query,
+      keywords: data.keywords,
+      recommendedBooks: data.recommendedBooks,
+      explanation: data.answer, // Backend의 answer -> Frontend의 explanation
+    };
+  } catch (error) {
+    console.error("❌ Backend API 호출 실패:", error);
+
+    // Fallback: Mock 데이터로 대체
+    console.warn("⚠️ Mock 데이터로 대체합니다.");
+    return analyzeLearningQueryMock(query);
+  }
+}
+
+/**
+ * Fallback Mock LLM service (Backend 연결 실패 시 사용)
+ */
+async function analyzeLearningQueryMock(query: string): Promise<AnalysisResult> {
+  const { searchTextbooks } = await import("./mockData");
+
   // Simulate API delay
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  // Simple keyword extraction (in production, use actual LLM)
+  // Simple keyword extraction
   const keywords = extractKeywords(query);
 
   // Search for relevant textbooks

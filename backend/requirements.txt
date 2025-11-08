@@ -1,0 +1,25 @@
+# FastAPI
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.5
+
+# LangChain & LLM
+langchain==0.3.15
+langchain-openai==0.2.14
+langchain-postgres==0.0.15
+openai==1.59.7
+
+# PostgreSQL & Vector DB
+psycopg2-binary==2.9.10
+pgvector==0.3.6
+sqlalchemy==2.0.36
+
+# PDF Processing
+pymupdf==1.25.2
+pypdf==5.1.0
+
+# Environment & Utils
+python-dotenv==1.0.1
+
+# Google Cloud Storage (optional)
+google-cloud-storage==2.19.0
