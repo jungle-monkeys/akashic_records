@@ -1,0 +1,103 @@
+# akashic_records – AI Mock Interview Platform
+
+## Project Rules for Next.js-based AI Mock Interview Service Development
+
+---
+
+## 📁 Project Structure & Architecture
+
+- All page routing must be created under the `src/app/` directory.
+- Common/shared resources should be placed in centralized folders:
+    - `src/components/` → **Global UI components**
+    - `src/apis/` → **Shared API functions**
+    - `src/constants/` → **Global constants**
+    - `src/utils/` → **Common utility functions (grouped by functionality)**
+
+- Route-specific or feature-specific resources should be placed in underscore-prefixed folders within their respective route directories:
+    - `src/app/users/_components/` → **Page-specific components**
+    - `src/app/interview/_lib/` → **Page-specific utility functions**
+    - `src/app/interview/_apis/` → **Page-specific API functions**
+
+- Use `[id]` folder naming convention for dynamic routes.
+
+---
+
+## 🎨 Design System & Styling
+
+### UI Component Library
+
+- **Primary**: Use **shadcn/ui** components for all basic UI elements
+- **Secondary**: Use **Tailwind CSS** for custom styling, layout, and spacing
+- **Icons**: Use **lucide-react** for consistent iconography
+
+### Design System Guidelines
+
+#### shadcn/ui Components (우선 사용)
+
+- **Basic Components**: Button, Input, Form, Table, Modal, Card, Typography
+- **Data Display**: DatePicker, Select, Upload, Tree, Timeline
+- **Layout**: Layout, Grid, Space, Divider
+- **Feedback**: Toast, Notification, Spinner, Progress, Alert
+- **Navigation**: Menu, Breadcrumb, Pagination, Steps
+- **Interactive**: Dialog, Popover, Dropdown, Tooltip, Accordion
+
+#### Tailwind CSS (스타일링 & 레이아웃)
+
+- **Layout & Spacing**: Use Tailwind for margins, padding, positioning
+- **Responsive Design**: Implement responsive breakpoints
+- **Custom Styling**: Customize shadcn/ui components with Tailwind classes
+- **Color System**: Use consistent color tokens and design system
+- **Animation**: Use tailwindcss-animate for smooth transitions
+
+#### Best Practices
+
+- **Component Priority**: Always check if shadcn/ui has a suitable component before creating custom ones
+- **Copy & Customize**: Copy shadcn/ui components to your project and customize as needed
+- **Consistency**: Maintain visual consistency with shadcn/ui's design language
+- **Accessibility**: Leverage Radix UI's built-in accessibility features
+- **Styling**: Use class-variance-authority, clsx, and tailwind-merge for advanced styling
+
+---
+
+## 🧠 State Management
+
+- Client state is managed using `Zustand` (e.g., user authentication, UI state).
+- Server state is managed using `@tanstack/react-query` (e.g., interview data, user profiles).
+- Global context providers should be placed in the `src/providers/` directory.
+
+---
+
+## 📝 Form & Validation
+
+- Use `react-hook-form` for all form handling.
+- Define form validation rules using `Zod` schemas.
+- Integrate Zod with React Hook Form using `@hookform/resolvers`.
+- Use shadcn/ui's Form components for consistent form styling.
+- Leverage Radix UI's form primitives for accessibility.
+
+---
+
+## ✅ Code Quality
+
+- All components and functions must have proper TypeScript type definitions.
+- Follow ESLint rules, including those provided by Next.js and TypeScript.
+- Maintain consistent code formatting using Prettier.
+
+---
+
+## 🗂️ File & Folder Naming
+
+- Use **PascalCase** for component filenames (e.g., `ButtonSample.tsx`).
+- Use **kebab-case** for folder names (e.g., `button-sample/`).
+- Use an underscore (`_`) prefix for folders excluded from routing (e.g., `_components`, `_lib`, `_apis`).
+- Shared resources go into top-level folders under `src/`, while page-specific resources are placed in route-specific `_` folders.
+
+---
+
+## 📌 Summary
+
+- **Shared resources** → `src/components/`, `src/apis/`, `src/utils/`, `src/constants/`
+- **Page-specific resources** → `src/app/[route]/_components/`, `_lib/`, `_apis/`
+- **UI Components** → **shadcn/ui first**, Tailwind CSS for custom styling
+- **Design System** → Maintain consistency with shadcn/ui's design language
+- **Icons** → **lucide-react** for consistent iconography
