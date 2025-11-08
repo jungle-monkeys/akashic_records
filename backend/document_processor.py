@@ -44,6 +44,7 @@
 #         print(f"✅ 총 {len(all_chunks)}개 청크 생성 (페이지: {len(pages)})")
 #         return all_chunks
 
+from pathlib import Path
 from typing import List
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -66,6 +67,7 @@ class DocumentProcessor:
         print(f"📖 PDF 로딩 중: {pdf_path}")
 
         pdf_document = fitz.open(pdf_path)
+        source_name = Path(pdf_path).name
         all_chunks = []
 
         for page_num in range(len(pdf_document)):
@@ -90,7 +92,7 @@ class DocumentProcessor:
                         "book_name": book_name,
                         "page": page_num + 1,
                         "chunk_index": chunk_idx,
-                        "source": pdf_path,
+                        "source": source_name,
                         # 🆕 좌표 정보 저장
                         "bbox": bbox,
                         "page_width": page.rect.width,
