@@ -1,14 +1,16 @@
 # qa_system.py
 from typing import Dict, Any
 from langchain_openai import ChatOpenAI
-from langchain_ollama import ChatOllama
+
+# from langchain_ollama import ChatOllama
 from langchain_core.prompts import PromptTemplate
 from langchain_postgres import PGVector
 from config import Config
 
+
 class QASystem:
     """질의응답 시스템"""
-    
+
     def __init__(self, vector_store: PGVector):
         self.vector_store = vector_store
         self.llm = ChatOpenAI(
@@ -120,12 +122,11 @@ class QASystem:
 질문: {question}
 
 답변 (교재 내용을 기반으로 상세하게 설명):"""
-        
+
         prompt = PromptTemplate(
-            template=prompt_template,
-            input_variables=["context", "question"]
+            template=prompt_template, input_variables=["context", "question"]
         )
-        
+
         # LLM으로 답변 생성
         formatted_prompt = prompt.format(context=context, question=question)
         answer = self.llm.invoke(formatted_prompt)
@@ -141,4 +142,5 @@ class QASystem:
             "answer": answer.content,
             "references": references,
             "metadata": metadata,
+
         }

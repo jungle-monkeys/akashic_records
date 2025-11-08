@@ -4,11 +4,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
 class Config:
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
     POSTGRES_CONNECTION = os.getenv(
         "POSTGRES_CONNECTION",
-        "postgresql://postgres:postgres@localhost:5432/textbook_db"
+        "postgresql://junglemonkeys:junglemonkeys1!@localhost:5432/textbook_db",
     )
     CHUNK_SIZE = 1000
     CHUNK_OVERLAP = 200
@@ -33,3 +34,4 @@ class Config:
         SIMILARITY_FALLBACK_THRESHOLD = None
     else:
         SIMILARITY_FALLBACK_THRESHOLD = float(_fallback_threshold)
+
