@@ -1,0 +1,10 @@
+# requirements.txt
+langchain
+langchain-openai>=0.0.5
+langchain-postgres>=0.0.6
+langchain-community>=0.0.20
+pypdf>=3.17.0
+psycopg2-binary>=2.9.9
+pgvector>=0.2.4
+python-dotenv>=1.0.0
+sqlalchemy>=2.0.0
