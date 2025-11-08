@@ -11,14 +11,22 @@ interface TextbookCardProps {
 }
 
 export function TextbookCard({ textbook }: TextbookCardProps) {
-  const { setSelectedBook } = useChatStore();
+  const { selectedBook, setSelectedBook } = useChatStore();
 
   const handleClick = () => {
     setSelectedBook(textbook);
   };
 
+  const isSelected = selectedBook?.id === textbook.id;
+
   return (
-    <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={handleClick}>
+    <Card
+      className={cn(
+        "hover:shadow-lg transition-all cursor-pointer",
+        isSelected && "ring-2 ring-primary shadow-lg bg-primary/5"
+      )}
+      onClick={handleClick}
+    >
       <CardHeader>
         <div className="flex items-start gap-4">
           <div className="w-16 h-20 bg-muted rounded flex items-center justify-center shrink-0">
