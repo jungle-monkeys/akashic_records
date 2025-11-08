@@ -158,6 +158,32 @@ export function PDFViewer({ pdfUrl, initialPage = 1, highlights: initialHighligh
                 }}
               />
             ))}
+
+          {/* 워터마크 오버레이 */}
+          <div
+            style={{
+              position: "absolute",
+              top: `${10 * scale}px`,
+              right: `${10 * scale}px`,
+              pointerEvents: "none",
+              zIndex: 20,
+            }}
+          >
+            <div
+              style={{
+                fontSize: `${Math.max(10, 12 * scale)}px`,
+                fontWeight: "600",
+                color: "rgba(0, 0, 0, 0.3)",
+                userSelect: "none",
+                whiteSpace: "nowrap",
+                backgroundColor: "rgba(255, 255, 255, 0.7)",
+                padding: `${4 * scale}px ${8 * scale}px`,
+                borderRadius: `${4 * scale}px`,
+              }}
+            >
+              Girae Kim (4645762)
+            </div>
+          </div>
         </div>
       </div>
     </div>
