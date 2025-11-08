@@ -56,10 +56,10 @@ export function ResultsPanel() {
           <ScrollArea className="flex-1 p-6">
             <div className="mb-4">
               <h3 className="text-lg font-semibold mb-1">
-                추천 교재 ({currentAnalysis.recommendedBooks.length})
+                Reference ({currentAnalysis.recommendedBooks.length})
               </h3>
               <p className="text-sm text-muted-foreground">
-                입력하신 내용을 바탕으로 관련 교재를 찾았습니다
+                Based on the information you provided, we found related textbooks.
               </p>
             </div>
             <div className="grid grid-cols-1 gap-4">
@@ -69,8 +69,8 @@ export function ResultsPanel() {
             </div>
             {currentAnalysis.recommendedBooks.length === 0 && (
               <div className="text-center py-12 text-muted-foreground">
-                <p>관련 교재를 찾을 수 없습니다</p>
-                <p className="text-sm mt-2">다른 키워드로 검색해보세요</p>
+                <p>We could not find any relevant textbooks.</p>
+                <p className="text-sm mt-2">Please use different keywords to search.</p>
               </div>
             )}
           </ScrollArea>
@@ -94,9 +94,9 @@ export function ResultsPanel() {
     return (
       <div className="flex flex-col items-center justify-center h-full text-muted-foreground">
         <Search className="h-16 w-16 mb-4 opacity-20" />
-        <p className="text-lg font-medium">검색 결과가 여기에 표시됩니다</p>
+        <p className="text-lg font-medium">Your search results will be shown here.</p>
         <p className="text-sm mt-2">
-          왼쪽 채팅창에서 관심 주제를 입력해보세요
+          Enter your topics of interest in the chat box on the left.
         </p>
       </div>
     );
@@ -134,10 +134,10 @@ export function ResultsPanel() {
       <ScrollArea className="flex-1 p-6">
         <div className="mb-4">
           <h3 className="text-lg font-semibold mb-1">
-            추천 교재 ({currentAnalysis.recommendedBooks.length})
+            Reference ({currentAnalysis.recommendedBooks.length})
           </h3>
           <p className="text-sm text-muted-foreground">
-            입력하신 내용을 바탕으로 관련 교재를 찾았습니다
+            Based on the information you provided, we found related textbooks.
           </p>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -147,8 +147,8 @@ export function ResultsPanel() {
         </div>
         {currentAnalysis.recommendedBooks.length === 0 && (
           <div className="text-center py-12 text-muted-foreground">
-            <p>관련 교재를 찾을 수 없습니다</p>
-            <p className="text-sm mt-2">다른 키워드로 검색해보세요</p>
+            <p> We could not find any relevant textbooks.</p>
+            <p className="text-sm mt-2">Please use different keywords to search.</p>
           </div>
         )}
       </ScrollArea>
