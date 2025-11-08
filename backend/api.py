@@ -120,9 +120,9 @@ def _format_books_from_references(references: List[Dict[str, Any]]) -> List[Dict
                 "id": book_id,
                 "title": source.replace("_", " ").replace(".pdf", ""),
                 "pdfUrl": f"/{source}",
-                "author": "Unknown",  # PDF 메타데이터에서 가져올 수 있으면 추가
-                "language": "en",  # 기본값
-                "level": "undergraduate",  # 기본값
+                "author": "Unknown",
+                "language": "english",
+                "level": "undergraduate",
                 "subject": "Computer Science",
                 "tags": ["computer-science", "textbook"],
                 "initialPage": 1,
