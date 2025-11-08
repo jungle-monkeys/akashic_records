@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Textbook } from "@/types/Textbook";
 import { cn } from "@/lib/utils";
 import { useChatStore } from "@/store/chatStore";
+import { PDFThumbnail } from "./PDFThumbnail";
 
 interface TextbookCardProps {
   textbook: Textbook;
@@ -29,17 +30,13 @@ export function TextbookCard({ textbook }: TextbookCardProps) {
     >
       <CardHeader>
         <div className="flex items-start gap-4">
-          <div className="w-16 h-20 bg-muted rounded flex items-center justify-center shrink-0">
-            {textbook.coverImage ? (
-              <img
-                src={textbook.coverImage}
-                alt={textbook.title}
-                className="w-full h-full object-cover rounded"
-              />
-            ) : (
-              <Book className="h-8 w-8 text-muted-foreground" />
-            )}
-          </div>
+          {/* PDF 첫 페이지를 썸네일로 표시 */}
+          <PDFThumbnail
+            pdfUrl={textbook.pdfUrl}
+            width={64}
+            height={80}
+            className="shrink-0"
+          />
           <div className="flex-1 min-w-0">
             <CardTitle className="text-lg line-clamp-2">{textbook.title}</CardTitle>
             <CardDescription className="mt-1">{textbook.author}</CardDescription>
