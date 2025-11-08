@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import { X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -19,6 +19,12 @@ export function PDFViewer({ pdfUrl, initialPage = 1, highlights: initialHighligh
   const [highlights, setHighlights] = useState<Highlight[]>(initialHighlights);
   const [scale, setScale] = useState(1.0);
   const pageRef = useRef<HTMLDivElement>(null);
+
+  // props가 변경될 때 state 업데이트
+  useEffect(() => {
+    setPageNumber(initialPage);
+    setHighlights(initialHighlights);
+  }, [initialPage, initialHighlights]);
 
   function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
     setNumPages(numPages);

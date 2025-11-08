@@ -1,6 +1,9 @@
+import { Highlight } from "./PDF";
+
 export interface Textbook {
   id: string;
   title: string;
+  pdfUrl: string;
   author: string;
   isbn?: string;
   publisherId?: string;
@@ -14,6 +17,8 @@ export interface Textbook {
   reviewCount?: number;
   createdAt: Date;
   updatedAt: Date;
+  initialPage: number;
+  highlights: Highlight[];
 }
 
 export interface ChatMessage {

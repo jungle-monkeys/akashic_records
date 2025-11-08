@@ -16,19 +16,13 @@ export function ResultsPanel() {
         {/* PDF Viewer - Left Half */}
         <div className="w-3/5 border-r">
           <PDFViewer
-            pdfUrl="/ttttt.pdf"
-            initialPage={15}
-            highlights={[
-              {
-                page: 15,
-                x: 100,
-                y: 200,
-                width: 300,
-                height: 50,
-              }
-            ]}
+            pdfUrl={selectedBook.pdfUrl}
+            initialPage={selectedBook.initialPage}
+            highlights={selectedBook.highlights}
           />
         </div>
+
+
 
         {/* Search Results - Right Half */}
         <div className="w-2/5 flex flex-col h-full">
@@ -89,17 +83,9 @@ export function ResultsPanel() {
   if (selectedBook) {
     return (
       <PDFViewer
-        pdfUrl="/ttttt.pdf"
-        initialPage={15}
-        highlights={[
-          {
-            page: 15,
-            x: 100,
-            y: 200,
-            width: 300,
-            height: 50,
-          }
-        ]}
+        pdfUrl={selectedBook.pdfUrl}
+        initialPage={selectedBook.initialPage}
+        highlights={selectedBook.highlights}
       />
     );
   }

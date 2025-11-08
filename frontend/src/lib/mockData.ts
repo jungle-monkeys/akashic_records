@@ -8,6 +8,7 @@ export const mockTextbooks: Textbook[] = [
     author: "John Smith",
     isbn: "978-1234567890",
     description: "A comprehensive guide to modern web development using React and TypeScript. Learn best practices and build real-world applications.",
+    pdfUrl: "/testpdf.pdf",
     language: "English",
     level: "Intermediate",
     subject: "Web Development",
@@ -16,6 +17,8 @@ export const mockTextbooks: Textbook[] = [
     reviewCount: 123,
     createdAt: new Date("2024-01-01"),
     updatedAt: new Date("2024-01-01"),
+    initialPage: 1,
+    highlights: [],
   },
   {
     id: "2",
@@ -23,6 +26,7 @@ export const mockTextbooks: Textbook[] = [
     author: "Jane Doe",
     isbn: "978-0987654321",
     description: "Start your journey into machine learning with practical examples and clear explanations. Perfect for beginners.",
+    pdfUrl: "/ttttt.pdf",
     language: "English",
     level: "Beginner",
     subject: "Machine Learning",
@@ -31,6 +35,8 @@ export const mockTextbooks: Textbook[] = [
     reviewCount: 256,
     createdAt: new Date("2024-02-01"),
     updatedAt: new Date("2024-02-01"),
+    initialPage: 1,
+    highlights: [],
   },
   {
     id: "3",
@@ -38,6 +44,7 @@ export const mockTextbooks: Textbook[] = [
     author: "Robert Johnson",
     isbn: "978-1122334455",
     description: "Master advanced Python concepts including decorators, generators, context managers, and more.",
+    pdfUrl: "/ttttt.pdf",
     language: "English",
     level: "Advanced",
     subject: "Programming",
@@ -46,6 +53,8 @@ export const mockTextbooks: Textbook[] = [
     reviewCount: 89,
     createdAt: new Date("2024-03-01"),
     updatedAt: new Date("2024-03-01"),
+    initialPage: 1,
+    highlights: [],
   },
   {
     id: "4",
@@ -53,6 +62,7 @@ export const mockTextbooks: Textbook[] = [
     author: "Sarah Williams",
     isbn: "978-2233445566",
     description: "Learn to build complete web applications from frontend to backend, including databases and deployment.",
+    pdfUrl: "/ttttt.pdf",
     language: "English",
     level: "Intermediate",
     subject: "Web Development",
@@ -61,6 +71,17 @@ export const mockTextbooks: Textbook[] = [
     reviewCount: 345,
     createdAt: new Date("2024-04-01"),
     updatedAt: new Date("2024-04-01"),
+    initialPage: 14,
+    highlights: [
+      {
+        page: 15,
+        x: 100,
+        y: 200,
+        width: 300,
+        height: 50,
+
+      }
+    ],
   },
   {
     id: "5",
@@ -68,6 +89,7 @@ export const mockTextbooks: Textbook[] = [
     author: "Michael Brown",
     isbn: "978-3344556677",
     description: "Essential data structures and algorithms explained with JavaScript examples. Prepare for technical interviews.",
+    pdfUrl: "/testpdf.pdf",
     language: "English",
     level: "Intermediate",
     subject: "Computer Science",
@@ -76,6 +98,17 @@ export const mockTextbooks: Textbook[] = [
     reviewCount: 512,
     createdAt: new Date("2024-05-01"),
     updatedAt: new Date("2024-05-01"),
+    initialPage: 21,
+    highlights: [
+      {
+        page: 20,
+        x: 200,
+        y: 300,
+        width: 100,
+        height: 100,
+
+      }
+    ],
   },
   {
     id: "6",
@@ -83,6 +116,7 @@ export const mockTextbooks: Textbook[] = [
     author: "Emily Chen",
     isbn: "978-4455667788",
     description: "Build neural networks and deep learning models using PyTorch. Includes computer vision and NLP projects.",
+    pdfUrl: "/ttttt.pdf",
     language: "English",
     level: "Advanced",
     subject: "Machine Learning",
@@ -91,6 +125,8 @@ export const mockTextbooks: Textbook[] = [
     reviewCount: 178,
     createdAt: new Date("2024-06-01"),
     updatedAt: new Date("2024-06-01"),
+    initialPage: 1,
+    highlights: [],
   },
   {
     id: "7",
@@ -98,6 +134,7 @@ export const mockTextbooks: Textbook[] = [
     author: "David Lee",
     isbn: "978-5566778899",
     description: "From basics to advanced concepts, master JavaScript with this comprehensive guide. Includes ES6+ features.",
+    pdfUrl: "/ttttt.pdf",
     language: "English",
     level: "Beginner",
     subject: "Programming",
@@ -106,6 +143,8 @@ export const mockTextbooks: Textbook[] = [
     reviewCount: 678,
     createdAt: new Date("2024-07-01"),
     updatedAt: new Date("2024-07-01"),
+    initialPage: 1,
+    highlights: [],
   },
   {
     id: "8",
@@ -113,6 +152,7 @@ export const mockTextbooks: Textbook[] = [
     author: "Lisa Anderson",
     isbn: "978-6677889900",
     description: "Learn to design and implement scalable RESTful APIs using Node.js, Express, and MongoDB.",
+    pdfUrl: "/ttttt.pdf",
     language: "English",
     level: "Intermediate",
     subject: "Backend Development",
@@ -121,6 +161,8 @@ export const mockTextbooks: Textbook[] = [
     reviewCount: 234,
     createdAt: new Date("2024-08-01"),
     updatedAt: new Date("2024-08-01"),
+    initialPage: 1,
+    highlights: [],
   },
 ];
 
