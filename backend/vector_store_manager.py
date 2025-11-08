@@ -15,10 +15,12 @@ class VectorStoreManager:
 
     def __init__(self):
         self.embeddings = OpenAIEmbeddings(
-            model=Config.EMBEDDING_MODEL, openai_api_key=Config.OPENAI_API_KEY
+            model=Config.EMBEDDING_MODEL,
+            openai_api_key=Config.OPENAI_API_KEY
         )
         # self.embeddings = OllamaEmbeddings(
-        #     model=Config.EMBEDDING_MODEL, base_url=Config.OLLAMA_BASE_URL
+        #     model=Config.EMBEDDING_MODEL,
+        #     base_url=Config.OLLAMA_BASE_URL
         # )
         self.vector_store: Optional[PGVector] = None
 

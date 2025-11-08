@@ -11,16 +11,16 @@ class ProblemGenerator:
     
     def __init__(self, vector_store: PGVector):
         self.vector_store = vector_store
-        # self.llm = ChatOpenAI(
-        #     model=Config.LLM_MODEL,
-        #     temperature=0.7,
-        #     openai_api_key=Config.OPENAI_API_KEY
-        # )
-        self.llm = ChatOllama(
+        self.llm = ChatOpenAI(
             model=Config.LLM_MODEL,
-            base_url=Config.OLLAMA_BASE_URL,
-            temperature=0.7
+            temperature=0.7,
+            openai_api_key=Config.OPENAI_API_KEY
         )
+        # self.llm = ChatOllama(
+        #     model=Config.LLM_MODEL,
+        #     base_url=Config.OLLAMA_BASE_URL,
+        #     temperature=0.7
+        # )
     
     def generate_keyword_problems(self, keyword: str, num_problems: int = 5) -> Dict:
         """키워드 기반 문제 생성"""
