@@ -1,25 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import { X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useChatStore } from "@/store/chatStore";
+import { Highlight, PDFViewerProps } from "@/types/PDF";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 
 // PDF.js worker 설정
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
-export function PDFViewer() {
+export function PDFViewer({ pdfUrl, initialPage = 1, highlights: initialHighlights = [] }: PDFViewerProps) {
   const { selectedBook, setSelectedBook } = useChatStore();
   const [numPages, setNumPages] = useState<number | null>(null);
-  const [pageNumber, setPageNumber] = useState(1);
+  const [pageNumber, setPageNumber] = useState(initialPage);
+  const [highlights, setHighlights] = useState<Highlight[]>(initialHighlights);
   const [scale, setScale] = useState(1.0);
+  const pageRef = useRef<HTMLDivElement>(null);
 
   function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
     setNumPages(numPages);
-    setPageNumber(1);
   }
 
   function handleClose() {
@@ -105,31 +107,52 @@ export function PDFViewer() {
 
       {/* PDF Content */}
       <div className="flex-1 overflow-auto bg-gray-100 flex items-start justify-center p-4">
-        <Document
-          file="/testpdf.pdf"
-          onLoadSuccess={onDocumentLoadSuccess}
-          loading={
-            <div className="flex items-center justify-center p-8">
-              <p className="text-muted-foreground">Loading PDF...</p>
-            </div>
-          }
-          error={
-            <div className="flex items-center justify-center p-8">
-              <p className="text-destructive">Failed to load PDF file.</p>
-            </div>
-          }
-        >
-          <Page
-            pageNumber={pageNumber}
-            scale={scale}
+        <div ref={pageRef} className="relative">
+          <Document
+            file={pdfUrl}
+            onLoadSuccess={onDocumentLoadSuccess}
             loading={
               <div className="flex items-center justify-center p-8">
-                <p className="text-muted-foreground">Loading page...</p>
+                <p className="text-muted-foreground">Loading PDF...</p>
               </div>
             }
-            className="shadow-lg"
-          />
-        </Document>
+            error={
+              <div className="flex items-center justify-center p-8">
+                <p className="text-destructive">Failed to load PDF file.</p>
+              </div>
+            }
+          >
+            <Page
+              pageNumber={pageNumber}
+              scale={scale}
+              loading={
+                <div className="flex items-center justify-center p-8">
+                  <p className="text-muted-foreground">Loading page...</p>
+                </div>
+              }
+              className="shadow-lg"
+            />
+          </Document>
+
+          {/* 하이라이트 오버레이 */}
+          {highlights
+            .filter((highlight) => highlight.page === pageNumber)
+            .map((highlight, index) => (
+              <div
+                key={index}
+                style={{
+                  position: "absolute",
+                  left: `${highlight.x * scale}px`,
+                  top: `${highlight.y * scale}px`,
+                  width: `${highlight.width * scale}px`,
+                  height: `${highlight.height * scale}px`,
+                  backgroundColor: highlight.color || "rgba(255, 255, 0, 0.4)",
+                  pointerEvents: "none", // 클릭 방지
+                  zIndex: 10,
+                }}
+              />
+            ))}
+        </div>
       </div>
     </div>
   );

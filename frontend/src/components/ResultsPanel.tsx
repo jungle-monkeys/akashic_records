@@ -11,7 +11,19 @@ export function ResultsPanel() {
 
   // 책이 선택되면 PDF 뷰어 표시
   if (selectedBook) {
-    return <PDFViewer />;
+    return <PDFViewer
+    pdfUrl="/ttttt.pdf"
+    initialPage={15}
+    highlights={[
+          {
+            page: 15,
+            x: 100,
+            y: 200,
+            width: 300,
+            height: 50,
+          }
+        ]}
+      />;
   }
 
   if (!currentAnalysis) {
