@@ -4,14 +4,21 @@ import { Book, Star } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textbook } from "@/types/Textbook";
 import { cn } from "@/lib/utils";
+import { useChatStore } from "@/store/chatStore";
 
 interface TextbookCardProps {
   textbook: Textbook;
 }
 
 export function TextbookCard({ textbook }: TextbookCardProps) {
+  const { setSelectedBook } = useChatStore();
+
+  const handleClick = () => {
+    setSelectedBook(textbook);
+  };
+
   return (
-    <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+    <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={handleClick}>
       <CardHeader>
         <div className="flex items-start gap-4">
           <div className="w-16 h-20 bg-muted rounded flex items-center justify-center shrink-0">

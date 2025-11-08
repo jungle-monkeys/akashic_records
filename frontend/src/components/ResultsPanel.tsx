@@ -3,10 +3,16 @@
 import { BookOpen, Search } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { TextbookCard } from "@/components/TextbookCard";
+import { PDFViewer } from "@/components/PDFViewer";
 import { useChatStore } from "@/store/chatStore";
 
 export function ResultsPanel() {
-  const { currentAnalysis } = useChatStore();
+  const { currentAnalysis, selectedBook } = useChatStore();
+
+  // 책이 선택되면 PDF 뷰어 표시
+  if (selectedBook) {
+    return <PDFViewer />;
+  }
 
   if (!currentAnalysis) {
     return (

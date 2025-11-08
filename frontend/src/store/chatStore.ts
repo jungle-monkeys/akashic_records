@@ -1,12 +1,14 @@
 import { create } from "zustand";
-import { ChatMessage, AnalysisResult } from "@/types/Textbook";
+import { ChatMessage, AnalysisResult, Textbook } from "@/types/Textbook";
 
 interface ChatStore {
   messages: ChatMessage[];
   currentAnalysis: AnalysisResult | null;
+  selectedBook: Textbook | null;
   isLoading: boolean;
   addMessage: (message: Omit<ChatMessage, "id" | "timestamp">) => void;
   setAnalysis: (analysis: AnalysisResult | null) => void;
+  setSelectedBook: (book: Textbook | null) => void;
   setLoading: (loading: boolean) => void;
   clearMessages: () => void;
 }
@@ -14,6 +16,7 @@ interface ChatStore {
 export const useChatStore = create<ChatStore>((set) => ({
   messages: [],
   currentAnalysis: null,
+  selectedBook: null,
   isLoading: false,
   addMessage: (message) =>
     set((state) => ({
@@ -27,6 +30,7 @@ export const useChatStore = create<ChatStore>((set) => ({
       ],
     })),
   setAnalysis: (analysis) => set({ currentAnalysis: analysis }),
+  setSelectedBook: (book) => set({ selectedBook: book }),
   setLoading: (loading) => set({ isLoading: loading }),
-  clearMessages: () => set({ messages: [], currentAnalysis: null }),
+  clearMessages: () => set({ messages: [], currentAnalysis: null, selectedBook: null }),
 }));
