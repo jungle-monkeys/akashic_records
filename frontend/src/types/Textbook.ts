@@ -5,7 +5,6 @@ export interface Textbook {
   title: string;
   pdfUrl: string;
   author: string;
-  isbn?: string;
   publisherId?: string;
   description?: string;
   coverImage?: string;
@@ -15,8 +14,6 @@ export interface Textbook {
   tags: string[];
   rating?: number;
   reviewCount?: number;
-  createdAt: Date;
-  updatedAt: Date;
   initialPage: number;
   highlights: Highlight[];
 }
