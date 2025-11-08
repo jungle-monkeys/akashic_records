@@ -2,10 +2,11 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
-import { X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut, FileQuestion } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useChatStore } from "@/store/chatStore";
 import { Highlight, PDFViewerProps } from "@/types/PDF";
+import { ProblemModal } from "./ProblemModal";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 
@@ -18,6 +19,7 @@ export function PDFViewer({ pdfUrl, initialPage = 1, highlights: initialHighligh
   const [pageNumber, setPageNumber] = useState(initialPage);
   const [highlights, setHighlights] = useState<Highlight[]>(initialHighlights);
   const [scale, setScale] = useState(1.0);
+  const [showProblemModal, setShowProblemModal] = useState(false);
   const pageRef = useRef<HTMLDivElement>(null);
 
   // props가 변경될 때 state 업데이트
@@ -99,6 +101,17 @@ export function PDFViewer({ pdfUrl, initialPage = 1, highlights: initialHighligh
         </div>
 
         <div className="flex items-center gap-2">
+          {/* 문제 생성 버튼 */}
+          <Button
+            variant="default"
+            size="sm"
+            onClick={() => setShowProblemModal(true)}
+            className="gap-2"
+          >
+            <FileQuestion className="h-4 w-4" />
+            Generate Problems
+          </Button>
+
           <Button variant="outline" size="icon" onClick={zoomOut}>
             <ZoomOut className="h-4 w-4" />
           </Button>
@@ -110,6 +123,13 @@ export function PDFViewer({ pdfUrl, initialPage = 1, highlights: initialHighligh
           </Button>
         </div>
       </div>
+
+      {/* 문제 모달 */}
+      <ProblemModal
+        open={showProblemModal}
+        onOpenChange={setShowProblemModal}
+        bookTitle={selectedBook?.title}
+      />
 
       {/* PDF Content */}
       <div className="flex-1 overflow-auto bg-gray-100 flex items-start justify-center p-4">
