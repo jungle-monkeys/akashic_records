@@ -7,6 +7,11 @@
 
 set -e  # 에러 발생 시 스크립트 중단
 
+# nvm 로드 (Node.js 버전 관리)
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # nvm 로드
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # nvm bash_completion 로드
+
 echo "======================================================================"
 echo "🚀 Akashic Records 배포 시작"
 echo "======================================================================"
@@ -144,20 +149,37 @@ else
     echo -e "${GREEN}✅ PM2가 설치되어 있습니다.${NC}"
 fi
 
-# PM2로 앱 시작
+# 애플리케이션 시작
 echo ""
 echo "======================================================================"
-echo "🚀 PM2로 애플리케이션 시작"
+echo "🚀 애플리케이션 시작 (nohup + PM2)"
 echo "======================================================================"
 
 # 기존 프로세스 중지
 echo "기존 프로세스 중지 중..."
-pm2 delete all 2>/dev/null || echo "중지할 프로세스가 없습니다."
 
-# 새 프로세스 시작
+# 백엔드 (nohup으로 실행된 프로세스 종료)
+echo "  - 백엔드 프로세스 종료 중..."
+pkill -f "uvicorn api:app" 2>/dev/null || echo "    (백엔드 프로세스 없음)"
+
+# 프론트엔드 (PM2 프로세스 종료)
+echo "  - 프론트엔드 PM2 프로세스 종료 중..."
+pm2 delete akashic-frontend 2>/dev/null || echo "    (프론트엔드 프로세스 없음)"
+
+# 백엔드 시작 (nohup)
 echo ""
-echo "새 프로세스 시작 중..."
-pm2 start ecosystem.config.js
+echo "🔵 백엔드 시작 중 (nohup)..."
+cd "$PROJECT_ROOT/backend"
+nohup "$PROJECT_ROOT/backend/venv/bin/python" -m uvicorn api:app --host 0.0.0.0 --port 8000 > logs/backend-nohup.log 2>&1 &
+BACKEND_PID=$!
+echo -e "${GREEN}✅ 백엔드 시작 완료 (PID: $BACKEND_PID)${NC}"
+
+# 프론트엔드 시작 (PM2)
+echo ""
+echo "⚛️  프론트엔드 시작 중 (PM2)..."
+cd "$PROJECT_ROOT"
+pm2 start ecosystem.config.js --only akashic-frontend
+echo -e "${GREEN}✅ 프론트엔드 시작 완료${NC}"
 
 # PM2 저장 (재부팅 시 자동 시작)
 echo ""
@@ -178,7 +200,17 @@ echo ""
 echo "======================================================================"
 echo "📊 배포 상태 확인"
 echo "======================================================================"
-pm2 status
+echo ""
+echo "백엔드 (nohup):"
+if ps -p $BACKEND_PID > /dev/null 2>&1; then
+    echo -e "  ${GREEN}✅ 실행 중 (PID: $BACKEND_PID)${NC}"
+else
+    echo -e "  ${RED}❌ 시작 실패 - 로그 확인: tail backend/logs/backend-nohup.log${NC}"
+fi
+
+echo ""
+echo "프론트엔드 (PM2):"
+pm2 status akashic-frontend
 
 echo ""
 echo "======================================================================"

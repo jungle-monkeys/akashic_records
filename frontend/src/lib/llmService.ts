@@ -1,7 +1,8 @@
 import { AnalysisResult } from "@/types/Textbook";
 
 // Backend API URL
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+// 빈 문자열 = 상대 경로 사용 (Nginx 리버스 프록시를 통해 /api로 접근)
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 /**
  * Real LLM service - Backend API 연동

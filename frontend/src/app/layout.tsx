@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Textom Book - AI-Powered eTextbook Platform",
+  title: "Akashic Records - AI-Powered eTextbook Platform",
   description: "Personalized eTextbook discovery and learning platform",
 };
 
