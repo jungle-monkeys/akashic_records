@@ -254,12 +254,12 @@ const MOCK_PROBLEMS_OSTEP = [
 
 // 책 이름으로 문제 세트 매핑
 const PROBLEM_SETS: Record<string, typeof MOCK_PROBLEMS_CSAPP> = {
-  "CSAPP 2016": MOCK_PROBLEMS_CSAPP,
+  "Computer Systems A Programmer's Perspective": MOCK_PROBLEMS_CSAPP,
   "Computer Networks": MOCK_PROBLEMS_NETWORK,
-  Algorithms: MOCK_PROBLEMS_ALGORITHMS,
+  "Algorithms": MOCK_PROBLEMS_ALGORITHMS,
   "Physical Chemistry": MOCK_PROBLEMS_PHYSICAL_CHEMISTRY,
-  "Organic Chemistry": MOCK_PROBLEMS_ORGANIC_CHEMISTRY,
-  OSTEP: MOCK_PROBLEMS_OSTEP,
+  "organic chem": MOCK_PROBLEMS_ORGANIC_CHEMISTRY,
+  "Operating Systems - Three Easy Pieces": MOCK_PROBLEMS_OSTEP,
   // 기본값
   default: MOCK_PROBLEMS_CSAPP,
 };

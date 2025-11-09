@@ -58,9 +58,9 @@ export function ChatPanel() {
     <div className="flex flex-col h-full border-r bg-muted/10">
       {/* Header */}
       <div className="p-4 border-b bg-background">
-        <h2 className="text-lg font-semibold">AI 어시스턴트</h2>
+        <h2 className="text-lg font-semibold">Assistant</h2>
         <p className="text-sm text-muted-foreground">
-          배우고 싶은 주제나 키워드를 입력하세요
+          What are you curious about?
         </p>
       </div>
 
@@ -70,10 +70,7 @@ export function ChatPanel() {
           {messages.length === 0 ? (
             <div className="text-center text-muted-foreground py-8">
               <p className="text-sm">
-                궁금한 기술이나 배우고 싶은 주제를 물어보세요.
-              </p>
-              <p className="text-xs mt-2">
-                예: &quot;웹 개발 배우고 싶어요&quot;, &quot;머신러닝 기초&quot;
+                Ask about any technology or topics you want to learn.
               </p>
             </div>
           ) : (
@@ -122,7 +119,7 @@ export function ChatPanel() {
           <Input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="메시지를 입력하세요..."
+            placeholder="Please enter a message."
             disabled={isLoading}
             className="flex-1"
           />
