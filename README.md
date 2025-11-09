@@ -1,5 +1,6 @@
 # Akashic Records — A Learning Assistant Powered by Academic Textbooks
-<img width="549" height="350" alt="image" src="https://github.com/user-attachments/assets/825127be-c131-4e0c-b141-5a5ed89defc0" />
+
+[![이미지 텍스트](http://i.ytimg.com/vi/L0N4DB0GH3g/maxresdefault.jpg)](https://www.youtube.com/watch?v=L0N4DB0GH3g)
 
 When students ask a question through chat, they can instantly explore how multiple textbooks explain the same concept — comparing styles and choosing the learning materials that best fit their own understanding.
 
