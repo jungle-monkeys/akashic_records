@@ -16,3 +16,36 @@ The system categorizes textbooks by writing style and topic depth, allowing stud
 ## 💰 Affordable Subscription Model
 Instead of expensive purchases, students can access textbooks through a low-cost, subscription-based rental system.
  → Reduced financial burden and scalable B2B partnerships with universities.
+ 
+---
+## Tech Stack
+
+### Backend
+- Framework: FastAPI (Python)
+- AI/LLM: OpenAI GPT-4, LangChain (RAG pipeline)
+- Database: PostgreSQL with pgvector extension, HNSW indexing for vector similarity search
+- Vector Embeddings: OpenAI text-embedding-3-small
+- PDF Processing: PyMuPDF (text extraction and coordinate mapping), RecursiveCharacterTextSplitter (chunk dividing)
+- Server: Uvicorn (ASGI)
+
+### Frontend
+- Framework: Next.js 15 (App Router)
+- Language: TypeScript
+- Styling: Tailwind CSS
+- UI Components: shadcn/ui (Radix UI based)
+- State Management: Zustand
+- Data Fetching: TanStack Query (React Query)
+- PDF Viewer: react-pdf-highlight
+- Icons: Lucide React
+
+### Infrastructure & DevOps
+- Process Management: PM2 (Frontend), nohup (Backend)
+- Reverse Proxy: Nginx
+- SSL/TLS: Let's Encrypt (Certbot)
+- DDNS: DuckDNS
+- Firewall: UFW
+
+### Development Tools
+- Version Control: Git
+- Package Managers: npm (Frontend), pip (Backend)
+- Environment: Python venv, Node.js (v22)
